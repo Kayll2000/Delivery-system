@@ -2,7 +2,7 @@
 #define BASEINFO_H
 //#include"baseinfo.h"
 
-#include<string.h>
+#include<string>
 #include "baseinfo.h"
 using namespace std;
 

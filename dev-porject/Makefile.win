@@ -1,0 +1,48 @@
+# Project: Project
+# Makefile created by Embarcadero Dev-C++ 6.3
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = Project_private.res
+OBJ      = MyDeliverySys/admin.o MyDeliverySys/baseinfo.o MyDeliverySys/core.o MyDeliverySys/customer.o MyDeliverySys/main.o MyDeliverySys/global.o $(RES)
+LINKOBJ  = MyDeliverySys/admin.o MyDeliverySys/baseinfo.o MyDeliverySys/core.o MyDeliverySys/customer.o MyDeliverySys/main.o MyDeliverySys/global.o $(RES)
+LIBS     = -L"E:/new-2023/Dev-Cpp/TDM-GCC-64/lib" -L"E:/new-2023/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/lib" -static-libgcc -pg
+INCS     = -I"E:/new-2023/Dev-Cpp/TDM-GCC-64/include" -I"E:/new-2023/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"E:/new-2023/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include"
+CXXINCS  = -I"E:/new-2023/Dev-Cpp/TDM-GCC-64/include" -I"E:/new-2023/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"E:/new-2023/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include" -I"E:/new-2023/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++"
+BIN      = Project.exe
+CXXFLAGS = $(CXXINCS) -pg -fexec-charset=gbk
+CFLAGS   = $(INCS) -pg -fexec-charset=gbk
+DEL      = E:\new-2023\Dev-Cpp\devcpp.exe INTERNAL_DEL
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${DEL} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+MyDeliverySys/admin.o: MyDeliverySys/admin.cpp
+	$(CPP) -c MyDeliverySys/admin.cpp -o MyDeliverySys/admin.o $(CXXFLAGS)
+
+MyDeliverySys/baseinfo.o: MyDeliverySys/baseinfo.cpp
+	$(CPP) -c MyDeliverySys/baseinfo.cpp -o MyDeliverySys/baseinfo.o $(CXXFLAGS)
+
+MyDeliverySys/core.o: MyDeliverySys/core.cpp
+	$(CPP) -c MyDeliverySys/core.cpp -o MyDeliverySys/core.o $(CXXFLAGS)
+
+MyDeliverySys/customer.o: MyDeliverySys/customer.cpp
+	$(CPP) -c MyDeliverySys/customer.cpp -o MyDeliverySys/customer.o $(CXXFLAGS)
+
+MyDeliverySys/main.o: MyDeliverySys/main.cpp
+	$(CPP) -c MyDeliverySys/main.cpp -o MyDeliverySys/main.o $(CXXFLAGS)
+
+MyDeliverySys/global.o: MyDeliverySys/global.cpp
+	$(CPP) -c MyDeliverySys/global.cpp -o MyDeliverySys/global.o $(CXXFLAGS)
+
+Project_private.res: Project_private.rc 
+	$(WINDRES) -i Project_private.rc --input-format=rc -o Project_private.res -O coff 
+
