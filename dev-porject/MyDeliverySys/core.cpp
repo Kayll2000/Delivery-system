@@ -31,6 +31,7 @@
                             2.8、确认收货
             BUGFIX:
                     1、[20230511]修复从二级菜单退出后无法再次进入的bug。
+                    2、[20230511]修复在顾客下单的时候，如果选择的菜品数量不足，将会卡住的bug。
             MODIFY:。
       
 
@@ -177,13 +178,19 @@ void core(){
                             case 6://按价格升序排列显示菜品
                             {
                                 rm.sortDishesByPriceAsc();
+                                system("pause");
+                                system("cls");
+                                #if DEBUG
                                 cout << "排序成功！" << endl;
+                                #endif
                                 break;
                             }
                             case 7://按价格降序排列显示菜品
                             {
                                 rm.sortDishesByPriceDesc();
+                                #if DEBUG
                                 cout << "排序成功！" << endl;
+                                #endif
                                 system("pause");
                                 system("cls");
                                 break;
@@ -191,7 +198,9 @@ void core(){
                             case 8://查看所有订单
                             {
                                 rm.viewAllOrders();
+                                #if DEBUG
                                 cout << "查询成功！" << endl;
+                                #endif
                                 system("pause");
                                 system("cls");
                                 break;
@@ -199,7 +208,9 @@ void core(){
                             case 9://查看未确认收货的订单
                             {
                                 rm.viewUnconfirmedOrders();
+                                #if DEBUG
                                 cout << "查询成功！"  << endl;
+                                #endif
                                 system("pause");
                                 system("cls");
                                 break;
@@ -207,7 +218,9 @@ void core(){
                             case 10://查看已确认收货的订单
                             {
                                 rm.viewConfirmedOrders();
+                                #if DEBUG
                                 cout << "查询成功！" << endl;
+                                #endif
                                 system("pause");
                                 system("cls");
                                 break;
@@ -215,6 +228,7 @@ void core(){
                             case 11://返回上级菜单
                                 flag1 = false;
                                 rm.savedishinfo();
+                                // rm.saveordernoinfo();
                                 break;
                                 system("pause");
                                 system("cls");
@@ -259,8 +273,8 @@ void core(){
                             case 1:
                                 {
                                 cu.viewMenu(rm);
-                                system("pause");
-                                system("cls");
+                                //system("pause");
+                                //system("cls");
                                 break;
                                 }
                             case 2:
@@ -326,6 +340,8 @@ void core(){
                             case 9:
                                 {
                                     flag2 = false;
+                                    cu.saveordernoinfo(&rm);
+                                    cu.savedishinfo_customer(&rm);
                                     system("pause");
                                     system("cls");
                                     break;

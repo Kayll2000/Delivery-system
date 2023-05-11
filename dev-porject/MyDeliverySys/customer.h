@@ -36,5 +36,9 @@ class Customer{
         void confirmDelivery(RestaurantManager *rm, int orderNo);
         // 保存客户信息
         void savecustomerinfo();
+        //保存所有订单信息
+        void saveordernoinfo(RestaurantManager *rm);
+        //保存菜品信息
+        void savedishinfo_customer(RestaurantManager *rm);
 };
 #endif

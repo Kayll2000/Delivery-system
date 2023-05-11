@@ -22,8 +22,11 @@
                     10、查看已下的订单
                     11、确认收货
             BUGFIX:
+                    1、[20230511]修复在顾客下单的时候，如果选择的菜品数量不足，将会卡住的bug。
             MODIFY:
                     1、[20230511]增加客户信息统计功能，输出到指定文件夹指定文件中。
+                    2、[20230511]增加订单信息统计功能，输出到指定文件夹指定文件中。
+                    3、[20230511]增加菜品信息统计功能，输出到指定文件夹指定文件中。
 
 *
 ****************************************************************************************************************************/
@@ -117,7 +120,8 @@ using namespace std;
                     dishIndex[i] = index;
                 }else{
                     cout << "菜品数量不足！" << endl;
-                    break;
+                    //break;
+                    return;
                 }
             }
             Order newOrder(orderNo, name);
@@ -173,4 +177,33 @@ using namespace std;
                 fo <<"客户名字："<< getName() << endl;
             fo.close();
             cout << "客户信息保存成功！" << endl;
+        }
+
+        //保存订单信息
+        void Customer::saveordernoinfo(RestaurantManager *rm)
+        {
+            cout <<"正在保存订单信息···"<< endl;
+            if(_access("Debug", 0) == -1)
+            {
+                _mkdir("Debug");//创建Debug文件夹
+            }
+            if(_access("Debug/OrderNoData", 0) == -1)
+            {
+                _mkdir("Debug/OrderNoData");
+            }
+
+            ofstream outfile;
+            outfile.open(ORDERNOFILE,ios::app);//允许输出(写入操作)到流。追加写入
+
+            for(int i=0; i<rm->orderCount; i++){
+                outfile << "订单号：" << rm->orders[i].orderNo << "\t顾客姓名：" << rm->orders[i].customerName << "\t订单金额：" 
+                << rm->orders[i].getOrderAmount() << "\t是否已确认收货：" << (rm->orders[i].isConfirmed()?"是":"否") << endl;
+            }
+            outfile.close();
+            cout << "订单信息保存成功！" << endl;
+        }
+        //保存菜品信息
+        void Customer::savedishinfo_customer(RestaurantManager *rm)
+        {
+            rm->savedishinfo();
         }

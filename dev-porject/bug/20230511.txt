@@ -1,0 +1,8 @@
+DeliverySys-v1.2 之前都有
+
+在顾客下单的时候，如果选择的菜品数量不足，将会卡住。
+
+error：Process exited after 41.12 seconds with return value 3221225477
+
+访问到了野指针。
+解决：在判断菜品数量不足的情况下，将else里面的break改为return。
