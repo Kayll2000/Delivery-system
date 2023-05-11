@@ -340,7 +340,12 @@ void core(){
                             case 9:
                                 {
                                     flag2 = false;
-                                    cu.saveordernoinfo(&rm);
+                                    if(ordersaveflag)
+                                    {
+                                        cu.saveordernoinfo(&rm);
+                                        ordersaveflag = false;
+                                    }
+                                   
                                     cu.savedishinfo_customer(&rm);
                                     system("pause");
                                     system("cls");

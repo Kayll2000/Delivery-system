@@ -4,6 +4,8 @@
 #include "baseinfo.h"
 #include "admin.h"
 #include <string>
+#include <vector>
+
 // 顾客类
 class Customer{
     private:
@@ -12,6 +14,11 @@ class Customer{
         // 构造函数
         Customer(){}
         Customer(string n);
+
+        vector<string> order_dish;//下单的菜品名
+        vector<int> order_discount;//下单的数量
+        vector<int> order_dishcate;//下单的菜品种类数
+
         // 获取顾客姓名
         string getName();
         // 注册

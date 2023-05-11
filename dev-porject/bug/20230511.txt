@@ -1,4 +1,4 @@
-DeliverySys-v1.2 之前都有
+【1】DeliverySys-v1.2 之前都有
 
 在顾客下单的时候，如果选择的菜品数量不足，将会卡住。
 
@@ -6,3 +6,15 @@ error：Process exited after 41.12 seconds with return value 3221225477
 
 访问到了野指针。
 解决：在判断菜品数量不足的情况下，将else里面的break改为return。
+
+【2】DeliverySys-v1.3及之前
+
+在顾客下单时，输入错误的菜品名仍然可以下单，只会导致保存下单的数据异常。
+
+【3】DeliverySys-v1.3及之前
+
+在顾客界面，下单完后多次退出进入后，将会导致订单信息重复保存。
+
+【4】DeliverySys-v1.4及之前
+
+当注册客户后，前一个客户会被下一个客户账号覆盖。

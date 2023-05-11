@@ -33,6 +33,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 #include <io.h>
 #include <direct.h>
 #include <cstdlib>
@@ -73,7 +74,7 @@ using namespace std;
         // 查看菜单
         void Customer::viewMenu(RestaurantManager rm){
             for(int i=0; i<rm.dishCount; i++){
-                cout << "菜品名称：" << rm.dishes[i].getName() << "\t价格：" << rm.dishes[i].getPrice() << "\t数量：" << rm.dishes[i].getQuantity() << endl;
+                cout << "菜品ID：" <<i<<"菜品名称：" << rm.dishes[i].getName() << "\t价格：" << rm.dishes[i].getPrice() << "\t数量：" << rm.dishes[i].getQuantity() << endl;
             }
         }
         // 根据菜品名称模糊查询菜品
@@ -97,23 +98,45 @@ using namespace std;
             int orderNo = rm->getOrderCount() + 1;
             int dishIndex[10];
             int count = 0;
+            bool flag = false;
             Dish chosenDishes[10];
-            cout << "请输入下单的菜品数量：";
+            cout << "请输入需要下单的菜品种数：";
             cin >> count;
+            order_dishcate.push_back(count);
             for(int i=0; i<count; i++){
                 int index = 0;
                 cout << "请输入第" << i+1 << "个菜品的名称：";
                 string dishName;
                 cin >> dishName;
+
                 for(int j=0; j<rm->dishCount; j++){
+                    // if(rm->dishes[j].getName() == dishName && rm->dishes[j].getQuantity() != 0){
+                    //     cout << "test test " << endl;
+                    // }
                     if(rm->dishes[j].getName() == dishName && rm->dishes[j].getQuantity() != 0){
                         index = j;
+                        #if DEBUG
+                        cout << "index:" << index << "数量：" <<  rm->dishes[j].getQuantity() << endl;
+                        #endif
+                        flag = true;
                         break;
-                    }
+                    }//else{
+                        //continue;//这里用break会出错，一直会找不到第二个菜品
+                        //return;//输入的菜品名字不存在或者数量为0
+                    //}
                 }
+                if(flag == false)
+                {
+                    cout << "菜品不存在或者数量为0!" << endl;
+                    return;
+                }
+                //order_dish = dishName;
+                order_dish.push_back(dishName);
                 cout << "请输入第" << i+1 << "个菜品的数量：";
                 int quantity;
                 cin >> quantity;
+                //order_discount = quantity;
+                order_discount.push_back(quantity);
                 if(quantity <= rm->dishes[index].getQuantity()){
                     chosenDishes[i] = rm->dishes[index];
                     chosenDishes[i].setQuantity(quantity);
@@ -130,6 +153,8 @@ using namespace std;
                 rm->dishes[dishIndex[i]].setQuantity(rm->dishes[dishIndex[i]].getQuantity() - chosenDishes[i].getQuantity());
             }
             rm->addNewOrder(name, orderNo, chosenDishes, count);
+            orderflag++;
+            ordersaveflag = true;
             cout << "下单成功！" << endl;
         }
         // 查看已下的订单
@@ -161,7 +186,6 @@ using namespace std;
          // 保存客户信息
         void Customer::savecustomerinfo()
         {
-            //string name = _name;
             cout <<"正在保存客户信息···"<< endl;
             if(_access("Debug", 0) == -1)
             {
@@ -191,14 +215,21 @@ using namespace std;
             {
                 _mkdir("Debug/OrderNoData");
             }
-
+            int temp = 0;
             ofstream outfile;
             outfile.open(ORDERNOFILE,ios::app);//允许输出(写入操作)到流。追加写入
 
-            for(int i=0; i<rm->orderCount; i++){
+            for(int i=orderflag; i<rm->orderCount; i++){
                 outfile << "订单号：" << rm->orders[i].orderNo << "\t顾客姓名：" << rm->orders[i].customerName << "\t订单金额：" 
                 << rm->orders[i].getOrderAmount() << "\t是否已确认收货：" << (rm->orders[i].isConfirmed()?"是":"否") << endl;
+                for(int j=0;j<order_dishcate[i];j++)
+                {
+                    outfile << "菜品名：" << order_dish[j+orderfishflag] << "\t下单数量：" << order_discount[j+orderfishflag] << endl;
+                    temp = j;
+                }
             }
+            outfile << endl;
+            orderfishflag += temp+1;
             outfile.close();
             cout << "订单信息保存成功！" << endl;
         }
