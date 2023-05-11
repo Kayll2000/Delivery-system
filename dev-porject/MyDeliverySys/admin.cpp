@@ -1,6 +1,6 @@
 /****************************************************************************************************************************
 * @function:服务端实现代码
-* @version:v1.0
+* @version:v1.2
 * @author:chenjunlong
 * @description:Store delivery system administrator side implementation function.
 * @github:https://github.com/Kayll2000/Alumni-login-system.git

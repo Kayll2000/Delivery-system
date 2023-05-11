@@ -1,6 +1,6 @@
 /****************************************************************************************************************************
 * @function:外卖系统的主函数
-* @version:v1.0
+* @version:v1.2
 * @author:chenjunlong
 * @description:Implement a simple delivery system.
 * @github:https://github.com/Kayll2000/Alumni-login-system.git

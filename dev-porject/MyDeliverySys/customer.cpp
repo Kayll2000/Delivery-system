@@ -1,6 +1,6 @@
 /****************************************************************************************************************************
 * @function:客户端实现代码
-* @version:v1.0
+* @version:v1.2
 * @author:chenjunlong
 * @description:Store takeout system client implementation function.
 * @github:https://github.com/Kayll2000/Alumni-login-system.git
@@ -22,17 +22,21 @@
                     10、查看已下的订单
                     11、确认收货
             BUGFIX:
-            MODIFY:。
-            
+            MODIFY:
+                    1、[20230511]增加客户信息统计功能，输出到指定文件夹指定文件中。
 
 *
 ****************************************************************************************************************************/
-
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <io.h>
+#include <direct.h>
+#include <cstdlib>
 #include"customer.h"
 #include "baseinfo.h"
 #include "admin.h"
-#include <iostream>
-#include <string>
+#include "global.h"
 
 using namespace std;
 
@@ -48,6 +52,7 @@ using namespace std;
             cout << "请输入您的姓名：";
             cin >> name;
             cout << "注册成功！" << endl;
+            savecustomerinfo();
         }
         // 登录
         bool Customer::login(){
@@ -147,4 +152,25 @@ using namespace std;
                     cout << "该订单不存在或不属于您！" << endl;
                 }
             }
+        }
+
+         // 保存客户信息
+        void Customer::savecustomerinfo()
+        {
+            //string name = _name;
+            cout <<"正在保存客户信息···"<< endl;
+            if(_access("Debug", 0) == -1)
+            {
+             _mkdir("Debug");//创建Debug文件夹
+            }
+            if(_access("Debug/CustomerData", 0) == -1)
+            {
+                _mkdir("Debug/CustomerData");
+            }
+
+            ofstream fo;
+            fo.open(CUSTOMERFILE,ios::app);//允许输出(写入操作)到流。追加写入
+                fo <<"客户名字："<< getName() << endl;
+            fo.close();
+            cout << "客户信息保存成功！" << endl;
         }

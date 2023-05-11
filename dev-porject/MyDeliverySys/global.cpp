@@ -1,6 +1,6 @@
 /****************************************************************************************************************************
 * @function:全局区域
-* @version:v1.0
+* @version:v1.2
 * @author:chenjunlong
 * @description:Store global variables.
 * @github:https://github.com/Kayll2000/Alumni-login-system.git

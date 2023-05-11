@@ -34,5 +34,7 @@ class Customer{
         void viewMyOrders(RestaurantManager *rm);
         // 确认收货
         void confirmDelivery(RestaurantManager *rm, int orderNo);
+        // 保存客户信息
+        void savecustomerinfo();
 };
 #endif

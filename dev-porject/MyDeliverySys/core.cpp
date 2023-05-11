@@ -1,6 +1,6 @@
 /****************************************************************************************************************************
 * @function:外卖系统的核心函数
-* @version:v1.0
+* @version:v1.2
 * @author:chenjunlong
 * @description:Store the core functions of the functional implementation.
 * @github:https://github.com/Kayll2000/Alumni-login-system.git

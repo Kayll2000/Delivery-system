@@ -3,6 +3,7 @@
 //#include"global.h"
 
 #define DISHFILE "./Debug/DishData/DishFILE.txt"    //保存菜品数据的路径
+#define CUSTOMERFILE "./Debug/CustomerData/CustomerInfo.txt"    //保存客户数据的路径
 
 extern bool Flag;
 extern bool flag1;
