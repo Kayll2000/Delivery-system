@@ -27,6 +27,7 @@
                     1、[20230511]增加客户信息统计功能，输出到指定文件夹指定文件中。
                     2、[20230511]增加订单信息统计功能，输出到指定文件夹指定文件中。
                     3、[20230511]增加菜品信息统计功能，输出到指定文件夹指定文件中。
+                    4、[20230511]更改顾客的注册和登录方式。
 
 *
 ****************************************************************************************************************************/
@@ -53,23 +54,49 @@ using namespace std;
         }
         // 注册
         void Customer::registerCustomer(){
-            cout << "请输入您的姓名：";
+            string _account,_password;
+            cout << "请输入您的姓名：" << endl;
             cin >> name;
+            cout << "请输入您的账户：" << endl;
+            cin >> _account;
+            cout << "请输入您的密码：" << endl;
+            cin >> _password;
+            customerarr[customernum].account = _account;
+            customerarr[customernum].password = _password;
+            customernum++;
             cout << "注册成功！" << endl;
             savecustomerinfo();
         }
         // 登录
         bool Customer::login(){
-            string n;
-            cout << "请输入您的姓名：";
-            cin >> n;
-            if(name == n){
-                cout << "登录成功！" << endl;
-                return true;
-            }else{
-                cout << "登录失败，顾客姓名不匹配！" << endl;
-                return false;
+            string _account,_password;
+            bool loginflag = false;
+            //string n;
+            //cout << "请输入您的姓名：";
+            cout << "请输入您的账户：" << endl;
+            cin >> _account;
+            cout << "请输入您的密码：" << endl;
+            cin >> _password;
+            for(int i = 0;i<customernum;i++)
+            {
+                if(_account == customerarr[i].account && _password == customerarr[i].password)
+                {
+                    cout << "登录成功！" << endl;
+                    loginflag =  true;
+                }
             }
+            if(loginflag == false)
+            {
+                cout << "登录失败，账户或密码错误！" << endl;
+            }
+            return loginflag;
+            // if(name == n){
+            //     cout << "登录成功！" << endl;
+            //     return true;
+            // }else{
+            //     cout << "登录失败，顾客姓名不匹配！" << endl;
+            //     return false;
+            // }
         }
         // 查看菜单
         void Customer::viewMenu(RestaurantManager rm){

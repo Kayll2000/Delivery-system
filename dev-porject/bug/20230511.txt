@@ -18,3 +18,7 @@ error：Process exited after 41.12 seconds with return value 3221225477
 【4】DeliverySys-v1.4及之前
 
 当注册客户后，前一个客户会被下一个客户账号覆盖。
+
+【5】DeliverySys-v1.5及之前
+
+注册的客户订单信息将会共享，即每个客户之间共享一个订单信息。

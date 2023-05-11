@@ -9,6 +9,7 @@
 
 extern int orderflag;
 extern int orderfishflag;
+extern int customernum;
 // extern int ordercount;
 extern bool ordersaveflag;
 extern bool Flag;

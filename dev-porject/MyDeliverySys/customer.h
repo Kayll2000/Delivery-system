@@ -7,20 +7,28 @@
 #include <vector>
 
 // 顾客类
+struct CUDATA
+{
+    string account; // 顾客账户
+    string password;    //密码
+};
+
 class Customer{
     private:
         string name; // 顾客姓名
+        //string password;    //密码
     public:
         // 构造函数
         Customer(){}
         Customer(string n);
-
+        CUDATA customerarr[100];//容纳100个顾客
         vector<string> order_dish;//下单的菜品名
         vector<int> order_discount;//下单的数量
         vector<int> order_dishcate;//下单的菜品种类数
 
         // 获取顾客姓名
         string getName();
+
         // 注册
         void registerCustomer();
         // 登录

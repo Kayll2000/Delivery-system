@@ -22,8 +22,9 @@
 
 int orderflag = -1;
 int orderfishflag = 0;
+int customernum = 0;
 // int ordercount = 0;
-bool ordersaveflag = true;
+bool ordersaveflag = false;
 bool Flag = true;
 bool flag1 = true;
 bool flag2 = true;
