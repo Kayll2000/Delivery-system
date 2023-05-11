@@ -47,6 +47,8 @@ class RestaurantManager{
         void addNewDish(string name, float price, int quantity);
         // 向订单列表中添加订单
         void addNewOrder(string name, int orderNo, Dish* dishes, int dishCount);
+        //保存菜品信息
+        void savedishinfo();
 };
 
 #endif

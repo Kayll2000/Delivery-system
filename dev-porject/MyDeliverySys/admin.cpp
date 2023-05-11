@@ -27,16 +27,20 @@
                     16、向菜品列表中添加菜品
                     17、向订单列表中添加订单
             BUGFIX:
-            MODIFY:。
+            MODIFY:
+                    1、[20230511]增加菜品信息统计并输出到指定文件夹指定文件的功能。
       
 
 *
 ****************************************************************************************************************************/
-
+#include <iostream>
+#include <fstream>
+#include <io.h>
+#include <direct.h>
+#include <cstdlib>
 #include "admin.h"
 #include "baseinfo.h"
-#include <iostream>
-
+#include "global.h"
 using namespace std;
         // 设置用户名和密码
         void RestaurantManager::setUsernameAndPassword(string u, string p){
@@ -171,4 +175,26 @@ using namespace std;
                 order.addDish(dishes[i]);
             }
             orders[orderCount++] = order;
+        }
+        //保存菜品信息
+        void RestaurantManager::savedishinfo()
+        {
+            cout <<"正在保存菜品信息···"<< endl;
+            if(_access("Debug", 0) == -1)
+            {
+                _mkdir("Debug");//创建Debug文件夹
+            }
+            if(_access("Debug/DishData", 0) == -1)
+            {
+                _mkdir("Debug/DishData");
+            }
+
+            ofstream fo;
+            fo.open(DISHFILE,ios::out);//允许输出(写入操作)到流。覆盖写入
+
+            for(int i=0; i<dishCount; i++){
+                fo << "菜品名称：" << dishes[i].getName() << "\t价格：" << dishes[i].getPrice() << "\t数量：" << dishes[i].getQuantity() << endl;
+            }
+            fo.close();
+            cout << "菜品信息保存成功！" << endl;
         }

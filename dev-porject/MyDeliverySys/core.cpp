@@ -30,6 +30,7 @@
                             2.7、查看已下的订单
                             2.8、确认收货
             BUGFIX:
+                    1、[20230511]修复从二级菜单退出后无法再次进入的bug。
             MODIFY:。
       
 
@@ -47,6 +48,7 @@
 using namespace std;
 void core(){
     // bool Flag = true;
+    Flag = true;
     RestaurantManager rm;
     rm.setUsernameAndPassword("admin", "1024");//默认管理员账号和密码
     Dish dish1("糖醋排骨", 25.0, 10);
@@ -65,9 +67,11 @@ void core(){
         cout << "请选择操作：";
         // bool flag1 = true;
         // bool flag2 = true;
+        flag1 = true;
+        flag2 = true;
         int choice;
         cin >> choice;
-
+        flag1 = true;
         switch(choice){
             case 1:{
                 string username, password;
@@ -107,6 +111,7 @@ void core(){
                                 cin >> quantity;
                                 rm.addNewDish(name, price, quantity);
                                 cout << "添加成功！" << endl;
+                                //rm.savedishinfo();
                                 system("pause");
                                 system("cls");
                                 break;
@@ -118,6 +123,7 @@ void core(){
                                 cin >> index;
                                 rm.deleteDish(index);
                                 cout << "删除成功！" << endl;
+                                //rm.savedishinfo();
                                 system("pause");
                                 system("cls");
                                 break;
@@ -136,9 +142,10 @@ void core(){
                                 cin >> m_price;
                                 cout << "修改后的菜品数量：" << endl;
                                 cin >> m_quantity;
-                                cin >> m_index;
+                                //cin >> m_index;
                                 rm.modifyDish(m_name,m_price,m_quantity,m_index);
-                                cout << "删除成功！" << endl;
+                                cout << "修改成功！" << endl;
+                                //rm.savedishinfo();
                                 system("pause");
                                 system("cls");
                                 break;
@@ -207,6 +214,7 @@ void core(){
                             }
                             case 11://返回上级菜单
                                 flag1 = false;
+                                rm.savedishinfo();
                                 break;
                                 system("pause");
                                 system("cls");
