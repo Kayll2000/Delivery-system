@@ -32,7 +32,8 @@
             BUGFIX:
                     1、[20230511]修复从二级菜单退出后无法再次进入的bug。
                     2、[20230511]修复在顾客下单的时候，如果选择的菜品数量不足，将会卡住的bug。
-            MODIFY:。
+            MODIFY:
+                    1、[20230512]更改注册和登录模式。
       
 
 *
@@ -56,7 +57,8 @@ void core(){
     Dish dish2("宫保鸡丁", 20.0, 15);
     rm.addDish(dish1);
     rm.addDish(dish2);
-    Customer cu("陈");//默认客户
+    //Customer cu("陈");//默认客户
+    CustomerList cus;//实例化客户对象
 
     while(Flag){
         cout << "#####################外卖系统#####################" << endl;
@@ -243,13 +245,22 @@ void core(){
             }
             case 2://顾客注册
             {
-                cu.registerCustomer();
+                //cu.registerCustomer();
+                cus.registerCustomer();
+                system("pause");
+                system("cls");
                 break;
             }
             case 3://顾客登录
             {
                 #if 1
-                if(cu.login())
+                int lid = cus.login();
+                cout << "lid " << lid << endl;
+               // cout << "欢迎您，" << cus.custlist[lid].getName() << "！" << endl;
+                cout << "欢迎您，" << cus.customerarr[lid].cuname << "！" << endl;
+                
+                // if(cu.login() != -1)
+                if(lid != -1)
                 { 
                     while(flag2)//while(true)
                     {
@@ -272,7 +283,8 @@ void core(){
                         {
                             case 1:
                                 {
-                                cu.viewMenu(rm);
+                                //cu.viewMenu(rm);
+                                cus.custlist[lid].viewMenu(rm);
                                 //system("pause");
                                 //system("cls");
                                 break;
@@ -282,7 +294,8 @@ void core(){
                                     string fname;
                                     cout << "输入你需要查询的菜品名：" << endl;
                                     cin >> fname;
-                                    cu.findDishByName(rm,fname);
+                                    //cu.findDishByName(rm,fname);
+                                    cus.custlist[lid].findDishByName(rm,fname);
                                     system("pause");
                                     system("cls");
                                     break;
@@ -294,35 +307,40 @@ void core(){
                                     cin >> minPrice;
                                     cout << "你要查询的最高价格：" << endl;
                                     cin >> maxPrice;
-                                    cu.findDishByPriceRange(rm,minPrice,maxPrice);
+                                    //cu.findDishByPriceRange(rm,minPrice,maxPrice);
+                                    cus.custlist[lid].findDishByPriceRange(rm,minPrice,maxPrice);
                                     system("pause");
                                     system("cls");
                                     break;
                                 }
                             case 4:
                                 {
-                                    cu.sortDishesByPriceAsc(&rm);
+                                    //cu.sortDishesByPriceAsc(&rm);
+                                    cus.custlist[lid].sortDishesByPriceAsc(&rm);
                                     system("pause");
                                     system("cls");
                                     break;
                                 }
                             case 5:
                                 {
-                                    cu.sortDishesByPriceDesc(&rm);
+                                    //cu.sortDishesByPriceDesc(&rm);
+                                    cus.custlist[lid].sortDishesByPriceDesc(&rm);
                                     system("pause");
                                     system("cls");
                                     break;
                                 }                            
                             case 6:
                                 {
-                                    cu.placeOrder(&rm);
+                                    //cu.placeOrder(&rm);
+                                    cus.custlist[lid].placeOrder(&rm);
                                     system("pause");
                                     system("cls");
                                     break;  
                                 }  
                             case 7:
                                 {
-                                    cu.viewMyOrders(&rm);
+                                    //cu.viewMyOrders(&rm);
+                                    cus.custlist[lid].viewMyOrders(&rm);
                                     system("pause");
                                     system("cls");
                                     break; 
@@ -332,7 +350,8 @@ void core(){
                                     int orderNo;
                                     cout << "输入你的订单号确认收货：" << endl;
                                     cin >> orderNo;
-                                    cu.confirmDelivery(&rm,orderNo);
+                                    //cu.confirmDelivery(&rm,orderNo);
+                                    cus.custlist[lid].confirmDelivery(&rm,orderNo);
                                     system("pause");
                                     system("cls");
                                     break;
@@ -342,11 +361,13 @@ void core(){
                                     flag2 = false;
                                     if(ordersaveflag)
                                     {
-                                        cu.saveordernoinfo(&rm);
+                                        //cu.saveordernoinfo(&rm);
+                                        cus.custlist[lid].saveordernoinfo(&rm);
                                         ordersaveflag = false;
                                     }
                                    
-                                    cu.savedishinfo_customer(&rm);
+                                    //cu.savedishinfo_customer(&rm);
+                                    cus.custlist[lid].savedishinfo_customer(&rm);
                                     system("pause");
                                     system("cls");
                                     break;

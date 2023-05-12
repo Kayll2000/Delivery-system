@@ -53,6 +53,7 @@ using namespace std;
             return name;
         }
         // 注册
+        /*
         void Customer::registerCustomer(){
             string _account,_password;
             cout << "请输入您的姓名：" << endl;
@@ -63,14 +64,38 @@ using namespace std;
             cin >> _password;
             customerarr[customernum].account = _account;
             customerarr[customernum].password = _password;
+            customerarr[customernum].id = customernum;
             customernum++;
             cout << "注册成功！" << endl;
             savecustomerinfo();
         }
+        */
+       void Customer::setName(string _name)
+       {
+            this->name = _name;
+       }
+        // 注册
+        void CustomerList::registerCustomer(){
+            string _account,_password,_name;
+            cout << "请输入您的姓名：" << endl;
+            cin >> _name;
+            setName(_name);
+            cout << "请输入您的账户：" << endl;
+            cin >> _account;
+            cout << "请输入您的密码：" << endl;
+            cin >> _password;
+            customerarr[customernum].account = _account;
+            customerarr[customernum].password = _password;
+            customerarr[customernum].cuname = _name;
+            customerarr[customernum].id = customernum;
+            cout << "注册成功！" << endl;
+            savecustomerinfo(customernum,_account,_password);
+            customernum++;
+        }
         // 登录
-        bool Customer::login(){
+        int CustomerList::login(){
             string _account,_password;
-            bool loginflag = false;
+            int loginflag = -1;
             //string n;
             //cout << "请输入您的姓名：";
             cout << "请输入您的账户：" << endl;
@@ -82,10 +107,10 @@ using namespace std;
                 if(_account == customerarr[i].account && _password == customerarr[i].password)
                 {
                     cout << "登录成功！" << endl;
-                    loginflag =  true;
+                    loginflag =  customerarr[i].id;
                 }
             }
-            if(loginflag == false)
+            if(loginflag == -1)
             {
                 cout << "登录失败，账户或密码错误！" << endl;
             }
@@ -98,6 +123,39 @@ using namespace std;
             //     return false;
             // }
         }
+        /*
+        // 登录
+        int Customer::login(){
+            string _account,_password;
+            int loginflag = -1;
+            //string n;
+            //cout << "请输入您的姓名：";
+            cout << "请输入您的账户：" << endl;
+            cin >> _account;
+            cout << "请输入您的密码：" << endl;
+            cin >> _password;
+            for(int i = 0;i<customernum;i++)
+            {
+                if(_account == customerarr[i].account && _password == customerarr[i].password)
+                {
+                    cout << "登录成功！" << endl;
+                    loginflag =  customerarr[i].id;
+                }
+            }
+            if(loginflag == -1)
+            {
+                cout << "登录失败，账户或密码错误！" << endl;
+            }
+            return -1;
+            // if(name == n){
+            //     cout << "登录成功！" << endl;
+            //     return true;
+            // }else{
+            //     cout << "登录失败，顾客姓名不匹配！" << endl;
+            //     return false;
+            // }
+        }
+        */
         // 查看菜单
         void Customer::viewMenu(RestaurantManager rm){
             for(int i=0; i<rm.dishCount; i++){
@@ -211,7 +269,7 @@ using namespace std;
         }
 
          // 保存客户信息
-        void Customer::savecustomerinfo()
+        void Customer::savecustomerinfo(int s_id,string s_account,string s_password)
         {
             cout <<"正在保存客户信息···"<< endl;
             if(_access("Debug", 0) == -1)
@@ -225,7 +283,7 @@ using namespace std;
 
             ofstream fo;
             fo.open(CUSTOMERFILE,ios::app);//允许输出(写入操作)到流。追加写入
-                fo <<"客户名字："<< getName() << endl;
+            fo << "标识ID：[" << s_id << "]" << "\t客户名字："<< getName() << "\t客户账号：" << s_account << "\t密码：" << s_password << endl;
             fo.close();
             cout << "客户信息保存成功！" << endl;
         }

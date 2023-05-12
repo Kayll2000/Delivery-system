@@ -12,4 +12,5 @@ DeliverySys-v1.4  修复订单信息保存异常的bug。
 
 DeliverySys-v1.5  更改了顾客的注册和登录方式。
 
+DeliverySys-v1.6  更改了注册和登录模式。
 
