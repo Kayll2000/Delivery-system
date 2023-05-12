@@ -23,6 +23,7 @@
                     11、确认收货
             BUGFIX:
                     1、[20230511]修复在顾客下单的时候，如果选择的菜品数量不足，将会卡住的bug。
+                    2、[20230512]修复在客户登录后，显示客户名字为空的bug。
             MODIFY:
                     1、[20230511]增加客户信息统计功能，输出到指定文件夹指定文件中。
                     2、[20230511]增加订单信息统计功能，输出到指定文件夹指定文件中。
@@ -72,7 +73,8 @@ using namespace std;
         */
        void Customer::setName(string _name)
        {
-            this->name = _name;
+            name = _name;
+            //cout << "setname scuss! " << name << endl;
        }
         // 注册
         void CustomerList::registerCustomer(){

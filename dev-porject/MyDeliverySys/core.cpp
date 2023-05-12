@@ -256,9 +256,9 @@ void core(){
                 #if 1
                 int lid = cus.login();
                 cout << "lid " << lid << endl;
-               // cout << "欢迎您，" << cus.custlist[lid].getName() << "！" << endl;
-                cout << "欢迎您，" << cus.customerarr[lid].cuname << "！" << endl;
-                
+                //cout << "欢迎您，" << cus.customerarr[lid].cuname << "！" << endl;
+                cus.custlist[lid].setName(cus.customerarr[lid].cuname);
+                cout << "欢迎您，" << cus.custlist[lid].getName() << "！" << endl;
                 // if(cu.login() != -1)
                 if(lid != -1)
                 { 
@@ -377,6 +377,8 @@ void core(){
                         }                        
                         
                     }
+                }else{
+                    cout << "登录失败！" << endl;
                 }
                 #endif
                 break;
